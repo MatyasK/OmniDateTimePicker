@@ -7,7 +7,10 @@ import 'package:omni_datetime_picker/src/components/time_picker_spinner.dart';
 
 class OmniDtpRange extends StatefulWidget {
   const OmniDtpRange({
-    super.key,
+    required this.cancelButton,
+    required this.okButton,
+    required this.amText,
+    required this.pmText,
     this.startInitialDate,
     this.startFirstDate,
     this.startLastDate,
@@ -23,6 +26,7 @@ class OmniDtpRange extends StatefulWidget {
     this.type,
     this.selectableDayPredicate,
     this.defaultView = DefaultView.start,
+    super.key,
   });
 
   final DateTime? startInitialDate;
@@ -42,6 +46,10 @@ class OmniDtpRange extends StatefulWidget {
   final OmniDateTimePickerType? type;
   final bool Function(DateTime)? selectableDayPredicate;
   final DefaultView defaultView;
+  final Widget cancelButton;
+  final Widget okButton;
+  final String amText;
+  final String pmText;
 
   @override
   State<OmniDtpRange> createState() => _OmniDtpRangeState();
@@ -83,6 +91,8 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                 controller: _tabController,
                 children: [
                   PickerView(
+                    amText: widget.amText,
+                    pmText: widget.pmText,
                     type: widget.type,
                     initialDate: widget.startInitialDate,
                     firstDate: widget.startFirstDate,
@@ -120,6 +130,8 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                     },
                   ),
                   PickerView(
+                    amText: widget.amText,
+                    pmText: widget.pmText,
                     type: widget.type,
                     initialDate: widget.endInitialDate,
                     firstDate: widget.endFirstDate,
@@ -159,10 +171,13 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                 ],
               ),
             ),
-            ButtonRow(onSavePressed: () {
-              Navigator.pop<List<DateTime>>(
-                  context, [selectedStartDateTime, selectedEndDateTime]);
-            }),
+            ButtonRow(
+                cancelButton: widget.cancelButton,
+                okButton: widget.okButton,
+                onSavePressed: () {
+                  Navigator.pop<List<DateTime>>(
+                      context, [selectedStartDateTime, selectedEndDateTime]);
+                }),
           ],
         ),
       ),
@@ -171,20 +186,23 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
 }
 
 class PickerView extends StatefulWidget {
-  const PickerView(
-      {super.key,
-      this.initialDate,
-      this.firstDate,
-      this.lastDate,
-      this.isShowSeconds,
-      required this.onTimeChange,
-      required this.onDateChange,
-      this.is24HourMode,
-      this.minutesInterval,
-      this.secondsInterval,
-      this.isForce2Digits,
-      this.type,
-      this.selectableDayPredicate});
+  const PickerView({
+    required this.amText,
+    required this.pmText,
+    required this.onTimeChange,
+    required this.onDateChange,
+    this.initialDate,
+    this.firstDate,
+    this.lastDate,
+    this.isShowSeconds,
+    this.is24HourMode,
+    this.minutesInterval,
+    this.secondsInterval,
+    this.isForce2Digits,
+    this.type,
+    this.selectableDayPredicate,
+    super.key,
+  });
 
   final DateTime? initialDate;
   final DateTime? firstDate;
@@ -203,6 +221,10 @@ class PickerView extends StatefulWidget {
 
   final OmniDateTimePickerType? type;
 
+
+  final String amText;
+  final String pmText;
+
   @override
   State<PickerView> createState() => _PickerViewState();
 }
@@ -215,7 +237,6 @@ class _PickerViewState extends State<PickerView>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final localizations = MaterialLocalizations.of(context);
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -232,8 +253,8 @@ class _PickerViewState extends State<PickerView>
               padding: const EdgeInsets.only(bottom: 24.0),
               child: TimePickerSpinner(
                 time: widget.initialDate,
-                amText: localizations.anteMeridiemAbbreviation,
-                pmText: localizations.postMeridiemAbbreviation,
+                amText: widget.amText,
+                pmText: widget.pmText,
                 isShowSeconds: widget.isShowSeconds ?? false,
                 is24HourMode: widget.is24HourMode ?? false,
                 minutesInterval: widget.minutesInterval ?? 1,

@@ -4,7 +4,11 @@ import 'package:omni_datetime_picker/src/variants/omni_datetime_range_picker_var
 
 class OmniDateTimeRangePicker extends StatelessWidget {
   const OmniDateTimeRangePicker({
-    super.key,
+    required this.cancelButton,
+    required this.okButton,
+    required this.amText,
+    required this.pmText,
+    required this.type,
     this.startInitialDate,
     this.startFirstDate,
     this.startLastDate,
@@ -18,9 +22,9 @@ class OmniDateTimeRangePicker extends StatelessWidget {
     this.isForce2Digits,
     this.borderRadius,
     this.constraints,
-    required this.type,
     this.selectableDayPredicate,
     this.defaultView = DefaultView.start,
+    super.key,
   });
 
   final DateTime? startInitialDate;
@@ -41,6 +45,11 @@ class OmniDateTimeRangePicker extends StatelessWidget {
   final bool Function(DateTime)? selectableDayPredicate;
   final DefaultView defaultView;
 
+  final Widget cancelButton;
+  final Widget okButton;
+  final String amText;
+  final String pmText;
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -53,6 +62,10 @@ class OmniDateTimeRangePicker extends StatelessWidget {
                 )
               : null,
       child: OmniDtpRange(
+        cancelButton: cancelButton,
+        okButton: okButton,
+        amText: amText,
+        pmText: pmText,
         startInitialDate: startInitialDate,
         startFirstDate: startFirstDate,
         startLastDate: startLastDate,

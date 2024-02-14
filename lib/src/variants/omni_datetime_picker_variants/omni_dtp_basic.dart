@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:omni_datetime_picker/src/components/button_row.dart';
 import 'package:omni_datetime_picker/src/components/calendar.dart';
@@ -6,7 +7,10 @@ import 'package:omni_datetime_picker/src/components/time_picker_spinner.dart';
 
 class OmniDtpBasic extends StatelessWidget {
   const OmniDtpBasic({
-    super.key,
+    required this.cancelButton,
+    required this.okButton,
+    required this.amText,
+    required this.pmText,
     this.separator,
     this.title,
     this.initialDate,
@@ -20,6 +24,7 @@ class OmniDtpBasic extends StatelessWidget {
     this.constraints,
     this.type,
     this.selectableDayPredicate,
+    super.key,
   });
 
   final Widget? separator;
@@ -36,10 +41,13 @@ class OmniDtpBasic extends StatelessWidget {
   final OmniDateTimePickerType? type;
   final bool Function(DateTime)? selectableDayPredicate;
 
+  final Widget cancelButton;
+  final Widget okButton;
+  final String amText;
+  final String pmText;
+
   @override
   Widget build(BuildContext context) {
-    final localizations = MaterialLocalizations.of(context);
-
     DateTime selectedDateTime = initialDate ?? DateTime.now();
 
     return SingleChildScrollView(
@@ -80,8 +88,8 @@ class OmniDtpBasic extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 24.0),
                 child: TimePickerSpinner(
                   time: initialDate,
-                  amText: localizations.anteMeridiemAbbreviation,
-                  pmText: localizations.postMeridiemAbbreviation,
+                  amText: amText,
+                  pmText: pmText,
                   isShowSeconds: isShowSeconds ?? false,
                   is24HourMode: is24HourMode ?? false,
                   minutesInterval: minutesInterval ?? 1,
@@ -101,12 +109,15 @@ class OmniDtpBasic extends StatelessWidget {
                   },
                 ),
               ),
-            ButtonRow(onSavePressed: () {
-              Navigator.pop<DateTime>(
-                context,
-                selectedDateTime,
-              );
-            }),
+            ButtonRow(
+                cancelButton: cancelButton,
+                okButton: okButton,
+                onSavePressed: () {
+                  Navigator.pop<DateTime>(
+                    context,
+                    selectedDateTime,
+                  );
+                }),
           ],
         ),
       ),

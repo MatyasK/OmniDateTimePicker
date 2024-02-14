@@ -3,22 +3,27 @@ import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:omni_datetime_picker/src/variants/omni_datetime_picker_variants/omni_dtp_basic.dart';
 
 class OmniDateTimePicker extends StatelessWidget {
-  const OmniDateTimePicker(
-      {super.key,
-      this.separator,
-      this.title,
-      this.initialDate,
-      this.firstDate,
-      this.lastDate,
-      this.isShowSeconds,
-      this.is24HourMode,
-      this.minutesInterval,
-      this.secondsInterval,
-      this.isForce2Digits,
-      this.borderRadius,
-      this.constraints,
-      required this.type,
-      this.selectableDayPredicate});
+  const OmniDateTimePicker({
+    required this.cancelButton,
+    required this.okButton,
+    required this.amText,
+    required this.pmText,
+    required this.type,
+    this.separator,
+    this.title,
+    this.initialDate,
+    this.firstDate,
+    this.lastDate,
+    this.isShowSeconds,
+    this.is24HourMode,
+    this.minutesInterval,
+    this.secondsInterval,
+    this.isForce2Digits,
+    this.borderRadius,
+    this.constraints,
+    this.selectableDayPredicate,
+    super.key,
+  });
 
   /// A widget that separates the [title] - if not null - and the calendar, also separates between date and time pickers
   final Widget? separator;
@@ -35,6 +40,10 @@ class OmniDateTimePicker extends StatelessWidget {
   final BoxConstraints? constraints;
   final OmniDateTimePickerType type;
   final bool Function(DateTime)? selectableDayPredicate;
+  final Widget cancelButton;
+  final Widget okButton;
+  final String amText;
+  final String pmText;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +57,10 @@ class OmniDateTimePicker extends StatelessWidget {
                 )
               : null,
       child: OmniDtpBasic(
+        amText: amText,
+        pmText: pmText,
+        cancelButton: cancelButton,
+        okButton: okButton,
         title: title,
         separator: separator,
         initialDate: initialDate,
