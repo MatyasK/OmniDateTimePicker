@@ -90,6 +90,7 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
               child: TabBarView(
                 controller: _tabController,
                 children: [
+                  // First Date picker tab
                   PickerView(
                     amText: widget.amText,
                     pmText: widget.pmText,
@@ -115,6 +116,9 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                       );
 
                       selectedStartDateTime = tempDateTime;
+                      setState(() {
+                        selectedEndDateTime = tempDateTime;
+                      });
                     },
                     onTimeChange: (value) {
                       DateTime tempDateTime = DateTime(
@@ -129,6 +133,7 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                       selectedStartDateTime = tempDateTime;
                     },
                   ),
+                  // Second Date picker tab
                   PickerView(
                     amText: widget.amText,
                     pmText: widget.pmText,
@@ -220,7 +225,6 @@ class PickerView extends StatefulWidget {
   final bool Function(DateTime)? selectableDayPredicate;
 
   final OmniDateTimePickerType? type;
-
 
   final String amText;
   final String pmText;
