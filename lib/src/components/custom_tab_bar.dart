@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomTabBar extends StatelessWidget {
-  const CustomTabBar({super.key, required this.tabController});
+  const CustomTabBar({
+    required this.tabController,
+    this.startRangeLabel,
+    this.endRangeLabel,
+    super.key, 
+    });
 
+  final String? startRangeLabel;
+  final String? endRangeLabel;
   final TabController tabController;
 
   @override
@@ -24,10 +31,10 @@ class CustomTabBar extends StatelessWidget {
           : Theme.of(context).colorScheme.primary,
       tabs: [
         Tab(
-          text: localizations.dateRangeStartLabel,
+          text: startRangeLabel ?? localizations.dateRangeStartLabel,
         ),
         Tab(
-          text: localizations.dateRangeEndLabel,
+          text: endRangeLabel ?? localizations.dateRangeEndLabel,
         ),
       ],
     );

@@ -12,6 +12,8 @@ class OmniDtpRange extends StatefulWidget {
     this.okButton,
     this.amText,
     this.pmText,
+    this.startRangeLabel,
+    this.endRangeLabel,
     this.startInitialDate,
     this.startFirstDate,
     this.startLastDate,
@@ -53,6 +55,8 @@ class OmniDtpRange extends StatefulWidget {
   final Widget? okButton;
   final String? amText;
   final String? pmText;
+  final String? startRangeLabel;
+  final String? endRangeLabel;
 
   @override
   State<OmniDtpRange> createState() => _OmniDtpRangeState();
@@ -109,7 +113,10 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CustomTabBar(tabController: _tabController),
+            CustomTabBar(
+                tabController: _tabController,
+                startRangeLabel: widget.startRangeLabel,
+                endRangeLabel: widget.endRangeLabel),
             ConstrainedBox(
               constraints: const BoxConstraints(
                 maxWidth: 350,
