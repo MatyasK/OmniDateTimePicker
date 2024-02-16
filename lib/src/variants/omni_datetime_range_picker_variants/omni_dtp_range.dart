@@ -116,9 +116,6 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                       );
 
                       selectedStartDateTime = tempDateTime;
-                      setState(() {
-                        selectedEndDateTime = tempDateTime;
-                      });
                     },
                     onTimeChange: (value) {
                       DateTime tempDateTime = DateTime(
