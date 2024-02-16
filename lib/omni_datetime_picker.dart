@@ -16,10 +16,10 @@ import 'package:omni_datetime_picker/src/omni_datetime_range_picker.dart';
 ///
 Future<DateTime?> showOmniDateTimePicker({
   required BuildContext context,
-  required Widget cancelButton,
-  required Widget okButton,
-  required String amText,
-  required String pmText,
+  Widget? cancelButton,
+  Widget? okButton,
+  String? amText,
+  String? pmText,
   Widget? title,
   Widget? separator,
   DateTime? initialDate,
@@ -93,10 +93,10 @@ Future<DateTime?> showOmniDateTimePicker({
 ///
 Future<List<DateTime>?> showOmniDateTimeRangePicker({
   required BuildContext context,
-  required Widget cancelButton,
-  required Widget okButton,
-  required String amText,
-  required String pmText,
+  Widget? cancelButton,
+  Widget? okButton,
+  String? amText,
+  String? pmText,
   DateTime? startInitialDate,
   DateTime? startFirstDate,
   DateTime? startLastDate,
@@ -108,7 +108,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   int? minutesInterval,
   int? secondsInterval,
   bool? isForce2Digits,
-  bool? isForceEndDateAfterStartDate,
+  bool isForceEndDateAfterStartDate = false,
   BorderRadiusGeometry? borderRadius,
   BoxConstraints? constraints,
   Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?

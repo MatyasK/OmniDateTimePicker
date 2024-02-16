@@ -7,10 +7,11 @@ import 'package:omni_datetime_picker/src/components/time_picker_spinner.dart';
 
 class OmniDtpRange extends StatefulWidget {
   const OmniDtpRange({
-    required this.cancelButton,
-    required this.okButton,
-    required this.amText,
-    required this.pmText,
+    required this.isForceEndDateAfterStartDate,
+    this.cancelButton,
+    this.okButton,
+    this.amText,
+    this.pmText,
     this.startInitialDate,
     this.startFirstDate,
     this.startLastDate,
@@ -22,12 +23,12 @@ class OmniDtpRange extends StatefulWidget {
     this.minutesInterval,
     this.secondsInterval,
     this.isForce2Digits,
-    bool? isForceEndDateAfterStartDate,
     this.constraints,
     this.type,
     this.selectableDayPredicate,
     this.defaultView = DefaultView.start,
-  }) : isForceEndDateAfterStartDate = isForceEndDateAfterStartDate ?? false;
+    super.key,
+  });
 
   final DateTime? startInitialDate;
   final DateTime? startFirstDate;
@@ -47,10 +48,11 @@ class OmniDtpRange extends StatefulWidget {
   final OmniDateTimePickerType? type;
   final bool Function(DateTime)? selectableDayPredicate;
   final DefaultView defaultView;
-  final Widget cancelButton;
-  final Widget okButton;
-  final String amText;
-  final String pmText;
+
+  final Widget? cancelButton;
+  final Widget? okButton;
+  final String? amText;
+  final String? pmText;
 
   @override
   State<OmniDtpRange> createState() => _OmniDtpRangeState();
@@ -207,16 +209,19 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                 ],
               ),
             ),
-            ButtonRow(onSavePressed: () {
-              Navigator.pop<List<DateTime>>(context, [
-                _selectedStartDateTime.value,
-                _selectedEndDateTime.value
-                            .isBefore(_selectedStartDateTime.value) &&
-                        widget.isForceEndDateAfterStartDate
-                    ? _selectedStartDateTime.value.copyWith()
-                    : _selectedEndDateTime.value
-              ]);
-            }),
+            ButtonRow(
+                cancelButton: widget.cancelButton,
+                okButton: widget.okButton,
+                onSavePressed: () {
+                  Navigator.pop<List<DateTime>>(context, [
+                    _selectedStartDateTime.value,
+                    _selectedEndDateTime.value
+                                .isBefore(_selectedStartDateTime.value) &&
+                            widget.isForceEndDateAfterStartDate
+                        ? _selectedStartDateTime.value.copyWith()
+                        : _selectedEndDateTime.value
+                  ]);
+                }),
           ],
         ),
       ),
@@ -226,21 +231,23 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
 
 class PickerView extends StatefulWidget {
   const PickerView({
-    super.key,
+    required this.onTimeChange,
+    required this.onDateChange,
+    this.amText,
+    this.pmText,
     this.initialDate,
     this.firstDate,
     this.lastDate,
     this.selectedStartDate,
     this.selectedEndDate,
     this.isShowSeconds,
-    required this.onTimeChange,
-    required this.onDateChange,
     this.is24HourMode,
     this.minutesInterval,
     this.secondsInterval,
     this.isForce2Digits,
     this.type,
     this.selectableDayPredicate,
+    super.key,
   });
 
   final DateTime? initialDate;
@@ -262,8 +269,8 @@ class PickerView extends StatefulWidget {
 
   final OmniDateTimePickerType? type;
 
-  final String amText;
-  final String pmText;
+  final String? amText;
+  final String? pmText;
 
   @override
   State<PickerView> createState() => _PickerViewState();

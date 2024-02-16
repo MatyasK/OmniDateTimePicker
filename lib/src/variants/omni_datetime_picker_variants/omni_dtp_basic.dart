@@ -7,10 +7,10 @@ import 'package:omni_datetime_picker/src/components/time_picker_spinner.dart';
 
 class OmniDtpBasic extends StatelessWidget {
   const OmniDtpBasic({
-    required this.cancelButton,
-    required this.okButton,
-    required this.amText,
-    required this.pmText,
+    this.cancelButton,
+    this.okButton,
+    this.amText,
+    this.pmText,
     this.separator,
     this.title,
     this.initialDate,
@@ -41,13 +41,14 @@ class OmniDtpBasic extends StatelessWidget {
   final OmniDateTimePickerType? type;
   final bool Function(DateTime)? selectableDayPredicate;
 
-  final Widget cancelButton;
-  final Widget okButton;
-  final String amText;
-  final String pmText;
+  final Widget? cancelButton;
+  final Widget? okButton;
+  final String? amText;
+  final String? pmText;
 
   @override
   Widget build(BuildContext context) {
+    final localizations = MaterialLocalizations.of(context);
     DateTime selectedDateTime = initialDate ?? DateTime.now();
 
     return SingleChildScrollView(
@@ -88,8 +89,8 @@ class OmniDtpBasic extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 24.0),
                 child: TimePickerSpinner(
                   time: initialDate,
-                  amText: amText,
-                  pmText: pmText,
+                  amText: amText ?? localizations.anteMeridiemAbbreviation,
+                  pmText: pmText ?? localizations.postMeridiemAbbreviation,
                   isShowSeconds: isShowSeconds ?? false,
                   is24HourMode: is24HourMode ?? false,
                   minutesInterval: minutesInterval ?? 1,

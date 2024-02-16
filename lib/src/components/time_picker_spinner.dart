@@ -102,7 +102,7 @@ class TimePickerSpinner extends StatefulWidget {
   final ValueNotifier<DateTime>? dynamicSelectedEndDate;
 
   const TimePickerSpinner({
-    Key? key,
+    required this.onTimeChange,
     this.time,
     this.minutesInterval = 1,
     this.secondsInterval = 1,
@@ -113,12 +113,12 @@ class TimePickerSpinner extends StatefulWidget {
     this.alignment,
     this.spacing,
     this.isForce2Digits = false,
-    required this.onTimeChange,
     this.pmText,
     this.amText,
     this.dynamicSelectedStartDate,
     this.dynamicSelectedEndDate,
-  }) : super(key: key);
+    super.key
+  }) ;
 
   @override
   State<TimePickerSpinner> createState() => _TimePickerSpinnerState();

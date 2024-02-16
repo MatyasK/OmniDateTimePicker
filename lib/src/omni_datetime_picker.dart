@@ -4,11 +4,11 @@ import 'package:omni_datetime_picker/src/variants/omni_datetime_picker_variants/
 
 class OmniDateTimePicker extends StatelessWidget {
   const OmniDateTimePicker({
-    required this.cancelButton,
-    required this.okButton,
-    required this.amText,
-    required this.pmText,
     required this.type,
+     this.cancelButton,
+     this.okButton,
+     this.amText,
+     this.pmText,
     this.separator,
     this.title,
     this.initialDate,
@@ -40,10 +40,10 @@ class OmniDateTimePicker extends StatelessWidget {
   final BoxConstraints? constraints;
   final OmniDateTimePickerType type;
   final bool Function(DateTime)? selectableDayPredicate;
-  final Widget cancelButton;
-  final Widget okButton;
-  final String amText;
-  final String pmText;
+  final Widget? cancelButton;
+  final Widget? okButton;
+  final String? amText;
+  final String? pmText;
 
   @override
   Widget build(BuildContext context) {

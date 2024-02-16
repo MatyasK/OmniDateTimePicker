@@ -4,11 +4,12 @@ import 'package:omni_datetime_picker/src/variants/omni_datetime_range_picker_var
 
 class OmniDateTimeRangePicker extends StatelessWidget {
   const OmniDateTimeRangePicker({
-    required this.cancelButton,
-    required this.okButton,
-    required this.amText,
-    required this.pmText,
     required this.type,
+    required this.isForceEndDateAfterStartDate,
+    this.cancelButton,
+    this.okButton,
+    this.amText,
+    this.pmText,
     this.startInitialDate,
     this.startFirstDate,
     this.startLastDate,
@@ -20,7 +21,6 @@ class OmniDateTimeRangePicker extends StatelessWidget {
     this.minutesInterval,
     this.secondsInterval,
     this.isForce2Digits,
-    this.isForceEndDateAfterStartDate,
     this.borderRadius,
     this.constraints,
     this.selectableDayPredicate,
@@ -40,17 +40,17 @@ class OmniDateTimeRangePicker extends StatelessWidget {
   final int? minutesInterval;
   final int? secondsInterval;
   final bool? isForce2Digits;
-  final bool? isForceEndDateAfterStartDate;
+  final bool isForceEndDateAfterStartDate;
   final BorderRadiusGeometry? borderRadius;
   final BoxConstraints? constraints;
   final OmniDateTimePickerType type;
   final bool Function(DateTime)? selectableDayPredicate;
   final DefaultView defaultView;
 
-  final Widget cancelButton;
-  final Widget okButton;
-  final String amText;
-  final String pmText;
+  final Widget? cancelButton;
+  final Widget? okButton;
+  final String? amText;
+  final String? pmText;
 
   @override
   Widget build(BuildContext context) {
