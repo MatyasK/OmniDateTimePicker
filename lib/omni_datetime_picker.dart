@@ -109,6 +109,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
   int? secondsInterval,
   bool? isForce2Digits,
   bool isForceEndDateAfterStartDate = false,
+  bool jumpToLastWhenDoneButtonPressed = false,
   BorderRadiusGeometry? borderRadius,
   BoxConstraints? constraints,
   Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
@@ -141,12 +142,12 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
       return Theme(
         data: theme ?? Theme.of(context),
         child: OmniDateTimeRangePicker(
+          jumpToLastWhenDoneButtonPressed: jumpToLastWhenDoneButtonPressed,
           cancelButton: cancelButton,
           okButton: okButton,
           amText: amText,
           pmText: pmText,
           type: type,
-          jumpToLastWhenDoneButtonPressed: true,
           startInitialDate: startInitialDate,
           startFirstDate: startFirstDate,
           startLastDate: startLastDate,

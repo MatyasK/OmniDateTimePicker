@@ -6,7 +6,7 @@ class OmniDateTimeRangePicker extends StatelessWidget {
   const OmniDateTimeRangePicker({
     required this.type,
     required this.isForceEndDateAfterStartDate,
-    this.jumpToLastWhenDoneButtonPressed = false,
+    required this.jumpToLastWhenDoneButtonPressed,
     this.cancelButton,
     this.okButton,
     this.amText,

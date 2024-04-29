@@ -8,6 +8,7 @@ import 'package:omni_datetime_picker/src/components/time_picker_spinner.dart';
 class OmniDtpRange extends StatefulWidget {
   const OmniDtpRange({
     required this.isForceEndDateAfterStartDate,
+    required this.jumpToLastWhenDoneButtonPressed,
     this.cancelButton,
     this.okButton,
     this.amText,
@@ -28,7 +29,6 @@ class OmniDtpRange extends StatefulWidget {
     this.constraints,
     this.type,
     this.selectableDayPredicate,
-    this.jumpToLastWhenDoneButtonPressed = false,
     this.defaultView = DefaultView.start,
     super.key,
   });
