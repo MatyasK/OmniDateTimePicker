@@ -6,6 +6,7 @@ class OmniDateTimeRangePicker extends StatelessWidget {
   const OmniDateTimeRangePicker({
     required this.type,
     required this.isForceEndDateAfterStartDate,
+    this.jumpToLastWhenDoneButtonPressed = false,
     this.cancelButton,
     this.okButton,
     this.amText,
@@ -41,6 +42,7 @@ class OmniDateTimeRangePicker extends StatelessWidget {
   final int? secondsInterval;
   final bool? isForce2Digits;
   final bool isForceEndDateAfterStartDate;
+  final bool jumpToLastWhenDoneButtonPressed;
   final BorderRadiusGeometry? borderRadius;
   final BoxConstraints? constraints;
   final OmniDateTimePickerType type;
@@ -80,6 +82,7 @@ class OmniDateTimeRangePicker extends StatelessWidget {
         secondsInterval: secondsInterval,
         isForce2Digits: isForce2Digits,
         isForceEndDateAfterStartDate: isForceEndDateAfterStartDate,
+        jumpToLastWhenDoneButtonPressed: jumpToLastWhenDoneButtonPressed,
         constraints: constraints,
         type: type,
         selectableDayPredicate: selectableDayPredicate,

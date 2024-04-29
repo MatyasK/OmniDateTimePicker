@@ -28,6 +28,7 @@ class OmniDtpRange extends StatefulWidget {
     this.constraints,
     this.type,
     this.selectableDayPredicate,
+    this.jumpToLastWhenDoneButtonPressed = false,
     this.defaultView = DefaultView.start,
     super.key,
   });
@@ -46,6 +47,7 @@ class OmniDtpRange extends StatefulWidget {
   final int? secondsInterval;
   final bool? isForce2Digits;
   final bool isForceEndDateAfterStartDate;
+  final bool jumpToLastWhenDoneButtonPressed;
   final BoxConstraints? constraints;
   final OmniDateTimePickerType? type;
   final bool Function(DateTime)? selectableDayPredicate;
@@ -220,14 +222,19 @@ class _OmniDtpRangeState extends State<OmniDtpRange>
                 cancelButton: widget.cancelButton,
                 okButton: widget.okButton,
                 onSavePressed: () {
-                  Navigator.pop<List<DateTime>>(context, [
-                    _selectedStartDateTime.value,
-                    _selectedEndDateTime.value
-                                .isBefore(_selectedStartDateTime.value) &&
-                            widget.isForceEndDateAfterStartDate
-                        ? _selectedStartDateTime.value.copyWith()
-                        : _selectedEndDateTime.value
-                  ]);
+                  if (widget.jumpToLastWhenDoneButtonPressed &&
+                      _tabController.index == 0) {
+                    _tabController.animateTo(1);
+                  } else {
+                    Navigator.pop<List<DateTime>>(context, [
+                      _selectedStartDateTime.value,
+                      _selectedEndDateTime.value
+                                  .isBefore(_selectedStartDateTime.value) &&
+                              widget.isForceEndDateAfterStartDate
+                          ? _selectedStartDateTime.value.copyWith()
+                          : _selectedEndDateTime.value
+                    ]);
+                  }
                 }),
           ],
         ),

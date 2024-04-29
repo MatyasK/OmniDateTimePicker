@@ -146,6 +146,7 @@ Future<List<DateTime>?> showOmniDateTimeRangePicker({
           amText: amText,
           pmText: pmText,
           type: type,
+          jumpToLastWhenDoneButtonPressed: true,
           startInitialDate: startInitialDate,
           startFirstDate: startFirstDate,
           startLastDate: startLastDate,
